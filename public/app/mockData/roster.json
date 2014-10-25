@@ -1,0 +1,8 @@
+{
+    "team": "Fighting Okra",
+    "league": "Rookies Report to Camp",
+    "players": [
+        {"firstName": "Michael", "lastName": "Irvin", "position": "WR", "team": "Cowboys", "byeWeek": 4, "totalPoints": 0},
+        {"firstName": "Rodger", "lastName": "Staubauch", "position": "QB", "team": "Cowboys", "byeWeek": 4, "totalPoints": 0}
+    ]
+}

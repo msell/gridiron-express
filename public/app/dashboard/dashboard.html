@@ -1,0 +1,75 @@
+<section id="dashboard-view" class="mainbar" data-ng-controller="dashboard as vm">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="today-datas">
+                        <li class="bred">
+                            <div class="pull-left"><i class="fa fa-medkit"></i></div>
+                            <div class="datas-text pull-right">
+                                <span class="bold">Injury Report</span> Miles Austin - Sprained Vagina
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+
+                        <li class="blightblue">
+                            <div class="pull-left"><i class="fa fa-trophy"></i></div>
+                            <div class="datas-text pull-right">
+                                <span class="bold">Team Record</span> {{vm.record}}
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="widget wviolet">
+                        <div data-cc-widget-header title="Dumb Punts"
+                             allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <table class="table table-condensed table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Position</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Team</th>
+                                    <th>Bye</th>
+                                    <th>Total Points</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="p in vm.people">
+                                    <td>{{p.position}}</td>
+                                    <td>{{p.firstName}}</td>
+                                    <td>{{p.lastName}}</td>
+                                    <td>{{p.team}}</td>
+                                    <td>{{p.byeWeek}}</td>
+                                    <td>{{p.totalPoints}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="widget wgreen">
+                        <div data-cc-widget-header title="{{vm.news.title}}"
+                             allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <small>{{vm.news.description}}</small>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

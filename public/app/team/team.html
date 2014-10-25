@@ -1,0 +1,36 @@
+<section id="dashboard-view" class="mainbar" data-ng-controller="team as vm">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="widget wviolet">
+                        <div data-cc-widget-header title="Dumb Punts"
+                             allow-collapse="true"></div>
+                        <div class="widget-content  text-info">
+                            <table class="table table-condensed table-striped">
+
+                                <thead>
+                                <tr>
+                                    <th>Position</th>
+                                    <th>Name</th>
+                                    <th>Team</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="p in vm.team.data">
+                                    <td>{{p.position.abbreviation}}</td>
+                                    <td>{{p.firstname + " " + p.lastname}}</td>
+                                    <td>{{p.team.city + " " + p.team.mascot}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

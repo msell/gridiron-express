@@ -1,0 +1,40 @@
+<section id="dashboard-view" class="mainbar" data-ng-controller="league as vm">
+    <section class="matter">
+        <div class="container">
+            <div class="row" ng-repeat="t in vm.league">
+                <div class="col-md-6">
+                    <div class="widget wviolet">
+                        <div data-cc-widget-header title="{{t.owner.name}}"
+                             allow-collapse="true">
+                             </div>
+                        <div class="widget-content  text-info">
+                            <table class="table table-condensed table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Position</th>
+                                    <th>Name</th>
+                                    <th>Team</th>
+                                    <th>Bye</th>
+                                    <th>Total Points</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="p in t.team">
+                                    <td>{{p.nfl_player.nfl_position.abbreviation}}</td>
+                                    <td>{{p.nfl_player.firstname + ' ' + p.nfl_player.lastname}}</td>
+                                    <td>{{p.nfl_player.nfl_team.city + ' ' + p.nfl_player.nfl_team.mascot}}</td>
+                                    <td>{{p.byeWeek}}</td>
+                                    <td>{{p.nfl_player.points_scored}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
