@@ -10,8 +10,13 @@
         var vm = this;
 
         vm.title = 'Admin';
+        vm.refreshPlayerData = refreshPlayerData;
 
         activate();
+
+        function refreshPlayerData(){
+          console.log('refresh player data');
+        };
 
         function activate() {
             var promises = [];
