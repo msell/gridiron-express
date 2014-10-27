@@ -1,4 +1,4 @@
-<nav class="navbar navbar-fixed-top navbar-inverse">
+<nav class="navbar navbar-fixed-top navbar-inverse" data-ng-controller="topnav as vm">
     <div class="navbar-header">
         <a href="/" class="navbar-brand"><span class="brand-title">Rookies Report to Camp!</span></a>
         <a class="btn navbar-btn navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -10,6 +10,18 @@
     <div class="navbar-collapse collapse">
         <div class="pull-right navbar-logo">
             <ul class="nav navbar-nav pull-right">
+                <li>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="leagueDropdown" data-toggle="dropdown">
+                            Rookies
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labeledby="leagueDropdown">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Violence</a> </li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Bunny Rabbits</a> </li>
+                        </ul>
+                    </div>
+                </li>
                 <li>
                     <a href="http://www4.myfantasyleague.com/2014/home/13040" target="_blank">
                         <img src="http://www4.myfantasyleague.com/images/new_mfl_logo.png" />

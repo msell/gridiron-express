@@ -2,8 +2,7 @@ var auth = require('./auth'),
     users = require('../controllers/users'),
     franchises = require('../controllers/franchises'),
     mongoose = require('mongoose'),
-    User = mongoose.model('User')
-    path = require('path');
+    User = mongoose.model('User');
 
 module.exports = function(app) {
 
