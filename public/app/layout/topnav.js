@@ -5,9 +5,9 @@
 
     function topnav(){
         var vm = this;
-        vm.leagues = [{"name":"Rookies Report to Camp"},
-            {"name":"Violence"},
-            {"name":"Unicorns"}
+        vm.leagues = [
+            {"id": 13040, "name":"Rookies Report to Camp"},
+            {"id": 39247, "name":"Violence Punctuated by Committee Meetings"}
         ];
 
         vm.selectedLeague = vm.leagues[0];
