@@ -9,5 +9,7 @@
             {"name":"Violence"},
             {"name":"Unicorns"}
         ];
+
+        vm.selectedLeague = vm.leagues[0];
     }
 })();

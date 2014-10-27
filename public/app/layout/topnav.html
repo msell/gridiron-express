@@ -12,14 +12,10 @@
             <ul class="nav navbar-nav pull-right">
                 <li>
                     <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="leagueDropdown" data-toggle="dropdown">
-                            Rookies
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu" aria-labeledby="leagueDropdown">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Violence</a> </li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Bunny Rabbits</a> </li>
-                        </ul>
+                        <select
+                                data-ng-model="vm.selectedLeague"
+                                ng-options="league.name for league in vm.leagues" >
+                        </select>
                     </div>
                 </li>
                 <li>
@@ -27,6 +23,7 @@
                         <img src="http://www4.myfantasyleague.com/images/new_mfl_logo.png" />
                     </a>
                 </li>
+                <!--<li>{{vm.selectedLeague.name}}</li>-->
             </ul>
         </div>
     </div>
