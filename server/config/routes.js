@@ -26,7 +26,7 @@ module.exports = function(app) {
     });
 
     app.get('/', function(req,res){
-        res.sendFile(path.join(__dirname, '../../public/app'))
+        res.redirect('./app');
     });
 
     app.all('/api/*', function(req, res) {
