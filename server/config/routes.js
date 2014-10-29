@@ -1,5 +1,6 @@
 var auth = require('./auth'),
     users = require('../controllers/users'),
+    players = require('../controllers/players'),
     franchises = require('../controllers/franchises'),
     mongoose = require('mongoose'),
     User = mongoose.model('User');
@@ -12,6 +13,8 @@ module.exports = function(app) {
 
     app.get('/api/franchises', franchises.getFranchises);
     app.get('/api/franchises/:id', franchises.getFranchiseById);
+
+    app.post('/api/reloadPlayerData' , players.reloadPlayerData);
 
     app.get('/partials/*', function(req, res) {
         res.render('../../public/app/' + req.params[0]);

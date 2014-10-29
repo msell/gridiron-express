@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
     userModel = require('../models/User'),
+    playerModel = require('../models/Player'),
     franchiseModel = require('../models/Franchise');
 
 module.exports = function(config) {
@@ -12,6 +13,5 @@ module.exports = function(config) {
 
     userModel.createDefaultUsers();
     franchiseModel.createDefaultFranchises();
-
 };
 
