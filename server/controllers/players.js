@@ -2,17 +2,16 @@ var Player = require('mongoose').model('Player'),
   http = require('http');
 
 exports.reloadPlayerData = function(req, res) {
-  getByeWeekData();
+  var byeWeeks = getByeWeekData();
   var players = getPlayerData();
-  
 
   res.sendStatus(202);
 };
 
 
 function getByeWeekData() {
-  var byeWeekData = '';
-
+  var rawData = '';
+  var byeWeeks = [];
   var options = {
     host: 'www.fantasyfootballnerd.com',
     port: 80,
@@ -21,17 +20,24 @@ function getByeWeekData() {
   };
   var callback = function (response) {
     response.on('data', function (chunk) {
-      byeWeekData += chunk;
+      rawData += chunk;
     });
 
     response.on('end', function () {
       console.log('got bye week data');
+      byeWeekData = JSON.parse(rawData);
+      for(var propertyName in byeWeekData)
+      {
+        byeWeekData[propertyName].map(function(x){
+          byeWeeks.push(x);
+        });
+      }
     });
   };
 
     http.request(options, callback).end();
 
-    return byeWeekData;
+    return byeWeeks;
 }
   function getPlayerData(){
     var playerData = '';
