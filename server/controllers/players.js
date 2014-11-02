@@ -2,13 +2,47 @@ var Player = require('mongoose').model('Player'),
   http = require('http');
 
 exports.reloadPlayerData = function(req, res) {
-  var byeWeeks = getByeWeekData();
-  var players = getPlayerData();
+ getByeWeekData();
+  //var players = getPlayerData();
 
   res.sendStatus(202);
 };
 
+function getPlayerData(byeWeeks){
+  var playerData = '';
+  var players = [];
+  var options = {
+    host: 'myfantasyleague.com',
+    port: 80,
+    path: '/2014/export/export?TYPE=players&JSON=1',
+    method: 'GET'
+  };
 
+  var callback = function(response) {
+    response.on('data', function (chunk) {
+      playerData += chunk;
+    });
+
+    response.on('end', function () {
+      var players = JSON.parse(playerData).players.player;
+      for(var i=0;i<players.length;i++){
+        players[i].bye = getByeFromTeam(byeWeeks, players[i].team);
+        getPlayerDetails(players[i]);
+      }
+    });
+  };
+
+  http.request(options, callback).end();
+
+}
+
+function getByeFromTeam(byeWeeks, team){
+  for(var i=0;i<byeWeeks.length;i++){
+    if(team === byeWeeks[i].team){
+      return byeWeeks[i].byeWeek;
+    }
+  }
+};
 function getByeWeekData() {
   var rawData = '';
   var byeWeeks = [];
@@ -24,7 +58,6 @@ function getByeWeekData() {
     });
 
     response.on('end', function () {
-      console.log('got bye week data');
       byeWeekData = JSON.parse(rawData);
       for(var propertyName in byeWeekData)
       {
@@ -32,41 +65,15 @@ function getByeWeekData() {
           byeWeeks.push(x);
         });
       }
+      getPlayerData(byeWeeks);
     });
   };
 
     http.request(options, callback).end();
-
-    return byeWeeks;
 }
-  function getPlayerData(){
-    var playerData = '';
-    var players = [];
-    var options = {
-      host: 'myfantasyleague.com',
-      port: 80,
-      path: '/2014/export/export?TYPE=players&JSON=1',
-      method: 'GET'
-    };
 
-    var callback = function(response) {
-      response.on('data', function (chunk) {
-        playerData += chunk;
-      });
 
-      response.on('end', function () {
-        console.log('got players');
-        var players = JSON.parse(playerData).players.player;
-        console.log('MFL returned ' + players.length + ' players');
-      });
-    };
-
-      http.request(options, callback).end();
-
-    return players;
-  }
-
-  function getPlayerDetails(playerId) {
+  function getPlayerDetails(player) {
     var playerDetails = '';
 
     var options = {
@@ -82,8 +89,8 @@ function getByeWeekData() {
 
       detailResponse.on('end', function(){
         console.log('got details');
-        playerDetails = JSON.parse(playerDetails).players.player;
-        //Player.create()
+        player.details = JSON.parse(playerDetails).players.player;
+        console.log(player);
       });
     };
 
