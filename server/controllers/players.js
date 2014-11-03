@@ -25,16 +25,28 @@ function getPlayerData(byeWeeks){
 
     response.on('end', function () {
       var players = JSON.parse(playerData).players.player;
-      for(var i=0;i<players.length;i++){
-        players[i].bye = getByeFromTeam(byeWeeks, players[i].team);
-        getPlayerDetails(players[i]);
+      var fantasyPlayers = players.filter(isFantasyPlayer);
+
+      for(var i=0;i<fantasyPlayers.length;i++){
+
+        fantasyPlayers[i].bye = getByeFromTeam(byeWeeks, fantasyPlayers[i].team);
+        getPlayerDetails(fantasyPlayers[i]);
       }
     });
   };
 
   http.request(options, callback).end();
 
+  function isFantasyPlayer(p){
+    return p.position.toUpperCase() === 'DEF' ||
+      p.position.toUpperCase() === 'QB' ||
+      p.position.toUpperCase() === 'RB' ||
+      p.position.toUpperCase() === 'WR' ||
+      p.position.toUpperCase() === 'PK' ||
+      p.position.toUpperCase() === 'TE'
+  }
 }
+
 
 function getByeFromTeam(byeWeeks, team){
   for(var i=0;i<byeWeeks.length;i++){
@@ -88,14 +100,22 @@ function getByeWeekData() {
       });
 
       detailResponse.on('end', function(){
-        console.log('got details');
-        player.details = JSON.parse(playerDetails).players.player;
-        console.log(player);
+        var details = JSON.parse(playerDetails).players.player;
+        player.name = details.name;
+        player.details = details;
+        if(player.bye) {
+          var p = new Player();
+          console.log(player.id + " : " + player.bye + " : " + details.position);
+          p.name = details.name;
+          p.bye = player.bye;
+          p.team = player.team;
+          p.mflId = player.id;
+          p.position = details.position;
+          p.save();
+        }
       });
     };
 
       http.request(options, callback).end();
-
-      return playerDetails;
   }
 
